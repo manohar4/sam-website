@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Sampath</title>
+    <meta property="og:title" name="og:title" content="Sampath">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <meta property="og:description" name="og:description" content="">
+    <meta property="og:image" name="og:image" content="/_110028 5-01-01-01-01-01.jpeg">
+    <meta property="og:image:width" content="3000">
+    <meta property="og:image:height" content="2000">
+    <meta property="og:url" name="og:url" content="">
+    <meta property="og:site_name" name="og:site_name" content="Sampth website">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/breakpoints.css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap-grid.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="/css/lightgallery.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.14/css/lightgallery.css">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.14/js/lightgallery-all.min.js"></script>
+    <script src="/Scripts/airtable.js"></script>
+
+
+</head>
+
+<body>
+
+    
+    
+    <header>
+        <div class="header">
+            <a href="#default" class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="186" viewBox="0 0 3016 763">
+                <text id="Sampath_DSP" data-name="Sampath DSP" transform="translate(0 560)" fill="#676666" font-size="533" font-family="BrandonGrotesque-Black, Brandon Grotesque" font-weight="800"><tspan x="0" y="0">Sampath DSP</tspan></text>
+              </svg></a>
+            <div class="header-right">
+              <a class="active" href="#home">Home</a>
+              <a href="#contact">Contact</a>
+              <a href="#about">About</a>
+            </div>
+          </div>
+        <nav id="navbar_top" class="navbar navbar-expand-lg stickyNavbar ">
+            <ul style="margin-bottom: 1rem;width: 100%;" class="nav nav-tabs stickyHeader sectionNav justify-content-center" id="myTab" role="tablist">
+
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+
+    <main style="min-height: 552px;">
+
+
+
+        <section id="content">
+
+           
+            <div class="sectionNavSpacer" id="navSpacerID"></div>
+            <div class="tab-content" id="myTabContent">
+
+            </div>
+        </section>
+
+    </main>
+    <script src="	https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.js"></script>
+
+    <script src="/Scripts/lightgalley/lightgallery.js"></script>
+    <script type="text/javascript">
+        lightGallery(document.getElementById('lightgallery'));
+    </script>
+    <script>
+        var Airtable = require('airtable');
+        var base = new Airtable({
+            apiKey: 'keybsrdTHoDUuYEPf'
+        }).base('appThoBBMx63fP5ds');
+
+
+
+
+
+        if ($(window).width() > 992) {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 40) {
+                    $('#navbar_top').addClass("fixed-top");
+                    // add padding top to show content behind navbar
+                    $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+                } else {
+                    $('#navbar_top').removeClass("fixed-top");
+                    // remove padding top from body
+                    $('body').css('padding-top', '0');
+                }
+            });
+        } // end if
+
+
+
+
+        base('sampath Data').select({
+            // Selecting the first 3 records in Grid view:
+            maxRecords: 20,
+            view: "Grid view"
+        }).eachPage(function page(records, fetchNextPage) {
+
+            for (var t = 0; t <= records.length - 1; t++) {
+                var tabUl = $("#myTab");
+                var li = document.createElement('li');
+                li.classList.add("nav-item");
+                var sectionName = records[t].fields.Section;
+                var a = document.createElement('a');
+                a.classList.add("nav-link");
+                if (t == 0) {
+                    a.classList.add("active");
+                    a.setAttribute("aria-selected", "true");
+                } else {
+                    a.setAttribute("aria-selected", "false");
+                }
+                a.href = "#" + sectionName;
+                a.id = sectionName + "-tab";
+                a.setAttribute("data-toggle", "tab");
+                a.setAttribute("aria-controls", sectionName);
+                a.setAttribute("role", "tab");
+                a.text = sectionName;
+
+                // a.addEventListener("click", function(){ 
+
+
+                // });
+
+
+                li.appendChild(a);
+                tabUl.append(li);
+
+                // <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">hey</div>
+
+                var tabContent = $("#myTabContent")
+                var div = document.createElement('div');
+                div.classList.add("tab-pane");
+                div.id = sectionName;
+                div.role = "tabpanel"
+                div.setAttribute("aria-labelledby", sectionName + "-tab");
+
+
+                var demoGalleryDiv = document.createElement('div');
+                demoGalleryDiv.classList.add('demo-gallery');
+                var uiLightGallery = document.createElement('ul');
+                uiLightGallery.id = "galleryID_" + t;
+                lightGallery(document.getElementById("galleryID_" + t));
+                demoGalleryDiv.appendChild(uiLightGallery);
+                div.appendChild(demoGalleryDiv);
+                tabContent.append(div);
+
+
+
+                for (var i = 0; i <= records[t].fields.Image.length - 1; i++) {
+
+                    var imageLink = records[t].fields.Image[i].thumbnails.full.url;
+                    var imageMediumLink = records[t].fields.Image[i].thumbnails.large.url;
+                    var li = document.createElement('li');
+                    $(li).attr("data-src", imageLink);
+                    var a = document.createElement('a');
+                    a.href = '';
+                    var img1 = document.createElement('img');
+                    img1.classList.add("img-responsive");
+                    img1.src = imageMediumLink;
+                    var insideDiv = document.createElement('div');
+                    insideDiv.classList.add("demo-gallery-poster");
+                    insideDiv.classList.add("zoomIcon");
+                    var img2 = document.createElement('img');
+                    img2.src = "https://sachinchoolur.github.io/lightGallery/static/img/zoom.png";
+
+                    insideDiv.appendChild(img2);
+                    a.appendChild(img1);
+                    a.appendChild(insideDiv);
+                    li.appendChild(a);
+
+                    $("#" + "galleryID_" + t).append(li);
+
+                    $("img").click(function () {
+                        var t = $(this).attr("src");
+                        $(".modal-body").html("<img src='" + t + "' class='modal-img'>");
+
+                        $(document).ready(function () {
+                            for (var j = 0; j <= records.length - 1; j++) {
+                                $('#' + "galleryID_" + j).lightGallery({
+                                    pager: true,
+                                    mode: 'lg-fade',
+                                    galleryId: j,
+                                    thumbnail: true
+                                });
+                            }
+                        });
+
+                    });
+
+
+
+                }
+
+
+            }
+
+
+
+        }, function done(err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
